@@ -1,2 +1,2 @@
-# case_converter
+# Case Converter
  PyQt Application
