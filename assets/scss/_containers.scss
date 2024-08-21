@@ -1,0 +1,70 @@
+@use "vars.scss";
+@use "mixins.scss";
+
+
+// Group Boxes
+.group
+{
+    @include mixins.border(vars.$color--elevation-level-4, 4);
+
+    background: vars.$color--elevation-level-1;
+    color: vars.$color--font-default;
+
+    padding: 16px;
+    padding-top: 24px;
+    margin-top: 24px; 
+   
+    
+    font: vars.$font--group-title;
+
+    &::title
+    {
+        @include mixins.border(vars.$color--elevation-level-6, 4, $borders: "0101");
+
+        background: vars.$color--elevation-level-4;
+        padding: 0 8px;
+
+        subcontrol-origin: padding;
+        subcontrol-position: top left; 
+
+        top: -3ex;
+        left: 16px;
+
+        font: vars.$font--group-title;
+    }
+}
+
+
+// Frames
+.frame.frame--words
+{
+    background: vars.$color--elevation-level-4;
+    padding: 0px 0;
+    border: none;
+    outline: none;
+}
+
+.frame.frame--info
+{
+    padding: 8px;
+    padding-top: 4px;
+    border: none;
+    outline: none;
+
+    QLabel
+    {
+        padding: 4px;
+        color: vars.$color--font-default;
+        border: none;
+        background: transparent;
+        border-bottom: 2px solid vars.$color--font-default;
+        text-indent: 20px;
+      
+    }
+
+    .label--last
+    {
+        border: none;
+    }
+
+}

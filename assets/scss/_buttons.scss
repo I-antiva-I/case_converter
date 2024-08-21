@@ -1,0 +1,92 @@
+@use "vars.scss";
+@use "mixins.scss";
+
+.button
+{
+    /*
+    Button Modifiers
+
+    // Case Buttons
+    &--sentence
+    &--capitalized
+    &--upper
+    &--lower
+    &--inverse
+    &--title
+
+    // Control
+    &--copy
+    &--paste
+    &--clear
+
+    // Other
+    &--remove
+    &--add
+
+    */
+
+    @include mixins.border-corners($color: vars.$color--elevation-level-5,
+     $base-w: 190, $base-h: 50, $width: 12, $height: 12, $size: 3);        
+
+    background: vars.$color--elevation-level-3;
+    color: vars.$color--font-default;
+
+    padding: 8px 0px;
+
+    min-height: 24px;
+    min-width: 96px;
+    
+    font: vars.$font--button-default;
+
+    &:hover
+    {
+        @include mixins.border-corners($color: vars.$color--interactive-hovered-alt,
+         $base-w: 190, $base-h: 50, $width: 12, $height: 12, $size: 3);   
+
+        background: vars.$color--interactive-hovered;
+    }
+
+    &:hover:pressed
+    {
+        @include mixins.border-corners($color: vars.$color--interactive-pressed-alt,
+         $base-w: 190, $base-h: 50, $width: 12, $height: 12, $size: 3);     
+
+        background: vars.$color--interactive-pressed;
+    }
+
+
+    &--remove,
+    &--clear
+    {
+        @include mixins.border-corners($color: vars.$color--interactive-danger-alt, $base-w: 190, $base-h: 50, $width: 12, $height: 12, $size: 3);      
+        background: vars.$color--interactive-danger;
+    }
+
+    &--remove
+    {
+        padding: 4px 0px;
+
+        @include mixins.border-corners($color: vars.$color--interactive-danger-alt,
+         $base-w: 96, $base-h: 38, $width: 8, $height: 8, $size: 3);  
+
+        min-height: 24px;
+        min-width: 96px;
+
+        font: vars.$font--button-default;
+    }
+
+    &--add
+    {
+        @include mixins.border-corners($color: vars.$color--interactive-active-alt,
+         $base-w: 102, $base-h: 34, $width: 8, $height: 8, $size: 3);  
+
+        background: vars.$color--interactive-active; 
+
+        padding: 2px 0px;
+
+        max-height: 34px;
+        min-width: 96px;
+    }
+
+    
+}

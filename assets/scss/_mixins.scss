@@ -1,0 +1,81 @@
+// Indexing starts with 1
+@function nth-char($string, $index) 
+{
+    @return str-slice($string, $index, $index);
+}
+
+
+@mixin border($color: red, $size: 2px, $type: solid, $borders: "1111")
+{
+    border: $size $type $color;
+
+    @if nth-char($borders, 1) != "1"
+    {
+        border-top: none 
+    }
+
+    @if nth-char($borders, 2) != "1"
+    {
+        border-right: none 
+    }
+
+    @if nth-char($borders, 3) != "1"
+    {
+        border-bottom: none 
+    }
+
+    @if nth-char($borders, 4) != "1"
+    {
+        border-left: none 
+    }
+}
+
+@mixin border-corners($color: red, $size: 2px, $width: 6, $height: 6, $base-color: transparent, $base-w: 80, $base-h: 20,)
+{
+    @include border($color, $size);
+
+    $stop-margin: 0.001;
+
+    $stop-hor-left:     calc($width / $base-w);
+    $stop-hor-right:    1 - calc($width / $base-w);
+    $stop-ver-left:     calc($height / $base-h);
+    $stop-ver-right:    1 - calc($height / $base-h);
+
+    border-bottom: $size solid 
+       qlineargradient(x1\: 0, y1\: 0, x2\: 1 , y2\: 0,
+       stop\: 0.000     $color,
+       stop\: $stop-hor-left - $stop-margin         $color, 
+       stop\: $stop-hor-left                        $base-color, 
+       stop\: $stop-hor-right                       $base-color,   
+       stop\: $stop-hor-right + $stop-margin        $color
+       stop\: 1.000     $color);
+
+    border-top: $size solid 
+       qlineargradient(x1\: 0, y1\: 0, x2\: 1 , y2\: 0,
+       stop\: 0.000     $color,
+       stop\: $stop-hor-left - $stop-margin         $color, 
+       stop\: $stop-hor-left                        $base-color, 
+       stop\: $stop-hor-right                       $base-color,   
+       stop\: $stop-hor-right + $stop-margin        $color
+       stop\: 1.000     $color);
+
+    border-left: $size solid 
+        qlineargradient(x1\: 0, y1\: 0, x2\: 0 , y2\: 1,
+       stop\: 0.000     $color,
+       stop\: $stop-ver-left - $stop-margin         $color, 
+       stop\: $stop-ver-left                        $base-color, 
+       stop\: $stop-ver-right                       $base-color,   
+       stop\: $stop-ver-right + $stop-margin        $color
+       stop\: 1.000     $color);
+
+    border-right: $size solid 
+        qlineargradient(x1\: 0, y1\: 0, x2\: 0 , y2\: 1,
+        stop\: 0.000     $color,
+        stop\: $stop-ver-left - $stop-margin         $color, 
+        stop\: $stop-ver-left                        $base-color, 
+        stop\: $stop-ver-right                       $base-color,   
+        stop\: $stop-ver-right + $stop-margin        $color
+        stop\: 1.000     $color);
+
+
+}

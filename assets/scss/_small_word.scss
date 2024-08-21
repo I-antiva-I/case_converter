@@ -1,0 +1,60 @@
+@use "vars.scss";
+@use "mixins.scss";
+
+.small-word
+{
+    background: transparent;
+
+    &__frame
+    {
+        &--odd
+        {
+            background: vars.$color--elevation-level-2;
+
+            & .small-word__label
+            {
+                color: vars.$color--font-default;
+
+                &--index
+                {
+                    @include mixins.border($borders: "0101", $color: vars.$color--elevation-level-8);
+                    border-left-width: 8px;
+                }
+
+            }
+        }
+        &--even
+        {
+            background: vars.$color--elevation-level-8;
+      
+
+            & .small-word__label
+            {
+                color: vars.$color--font-default-alt;
+
+                &--index
+                {
+                    @include mixins.border($borders: "0101", $color: vars.$color--elevation-level-2);
+                    border-left-width: 8px;
+                }
+            }
+        }
+
+
+    }
+
+    &__label
+    {
+        &--word
+        {
+            padding: 0 8px;
+        }
+        &--index
+        {
+            min-width: 2em;
+            padding: 0 8px;
+
+        }
+    }
+}
+

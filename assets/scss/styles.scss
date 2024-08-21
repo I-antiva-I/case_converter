@@ -1,0 +1,112 @@
+@use "vars.scss";
+@use "mixins.scss";
+
+@use "buttons.scss";
+@use "containers.scss";
+@use "scrolls.scss";
+@use "small_word.scss";
+
+// All
+*
+{
+    font: vars.$font--default;
+    color: vars.$color--font-default-alt;
+}
+
+// Main window
+#main-window
+{
+    background: vars.$color--elevation-level-1;
+
+}
+
+// Tab Widget
+#tabs
+{
+
+    &::pane
+    {
+       padding: 8px 12px 12px 12px;
+       background:  vars.$color--elevation-level-2;
+       border: none;
+    }
+
+    QTabBar
+    {
+        &::tab
+        {
+
+            width: 160px;
+            height: 32px;
+
+            @include mixins.border(vars.$color--elevation-level-4, $size: 4px, $borders: "0010");
+
+            background: vars.$color--elevation-level-3;
+            color: vars.$color--font-default;
+            
+            font: vars.$font--tab-title;
+
+
+            &:selected,
+            &:selected:hover,
+            &:selected:pressed
+            {
+                @include mixins.border(vars.$color--interactive-active-alt, 4, $borders: "0010");
+
+                background: vars.$color--interactive-active;
+                color: vars.$color--font-default;
+            }
+
+            &:hover
+            {
+                @include mixins.border(vars.$color--interactive-hovered-alt, 4, $borders: "0010");
+                
+                background: vars.$color--interactive-hovered;
+                color: vars.$color--font-default;
+            }
+
+            &:hover:pressed
+            {
+                @include mixins.border(vars.$color--interactive-pressed-alt 4, $borders: "0010");
+                
+                background: vars.$color--interactive-pressed;
+                color: vars.$color--font-default-alt;
+
+            }
+        }
+
+    } 
+}
+
+// Text Edit (Conversion View)
+#text-edit 
+{   
+    border-radius: 8px;    
+    font: vars.$font--text-edit;
+}
+
+// Line Edit (Information View)
+#line-edit
+{
+    border-radius: 4px;    
+    font: vars.$font--line-edit;
+
+}
+
+#text-edit,
+#line-edit
+{
+    @include mixins.border(vars.$color--elevation-level-6, 3);
+
+    background: vars.$color--font-default;
+    color: vars.$color--font-default-alt;
+
+    selection-color: vars.$color--font-default;
+    selection-background-color: vars.$color--interactive-active-alt;
+
+    &:focus
+    {
+        @include mixins.border(vars.$color--interactive-active-alt, 3);
+    }
+
+}

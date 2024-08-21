@@ -1,0 +1,366 @@
+/* #region Colors */
+/* #endregion */
+/* #region Fonts */
+/* #endregion */
+.button {
+  /*
+  Button Modifiers
+
+  // Case Buttons
+  &--sentence
+  &--capitalized
+  &--upper
+  &--lower
+  &--inverse
+  &--title
+
+  // Control
+  &--copy
+  &--paste
+  &--clear
+
+  // Other
+  &--remove
+  &--add
+
+  */
+  border: 3 solid "#696969";
+  border-bottom: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 "#696969", stop\: 0.0621578947 "#696969", stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 "#696969" stop\: 1 "#696969");
+  border-top: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 "#696969", stop\: 0.0621578947 "#696969", stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 "#696969" stop\: 1 "#696969");
+  border-left: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 "#696969", stop\: 0.239 "#696969", stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 "#696969" stop\: 1 "#696969");
+  border-right: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 "#696969", stop\: 0.239 "#696969", stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 "#696969" stop\: 1 "#696969");
+  background: "#424242";
+  color: whitesmoke;
+  padding: 8px 0px;
+  min-height: 24px;
+  min-width: 96px;
+  font: 600 18px "Titillium Web";
+}
+.button:hover {
+  border: 3 solid deepskyblue;
+  border-bottom: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 deepskyblue, stop\: 0.0621578947 deepskyblue, stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 deepskyblue stop\: 1 deepskyblue);
+  border-top: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 deepskyblue, stop\: 0.0621578947 deepskyblue, stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 deepskyblue stop\: 1 deepskyblue);
+  border-left: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 deepskyblue, stop\: 0.239 deepskyblue, stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 deepskyblue stop\: 1 deepskyblue);
+  border-right: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 deepskyblue, stop\: 0.239 deepskyblue, stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 deepskyblue stop\: 1 deepskyblue);
+  background: royalblue;
+}
+.button:hover:pressed {
+  border: 3 solid whitesmoke;
+  border-bottom: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 whitesmoke, stop\: 0.0621578947 whitesmoke, stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 whitesmoke stop\: 1 whitesmoke);
+  border-top: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 whitesmoke, stop\: 0.0621578947 whitesmoke, stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 whitesmoke stop\: 1 whitesmoke);
+  border-left: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 whitesmoke, stop\: 0.239 whitesmoke, stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 whitesmoke stop\: 1 whitesmoke);
+  border-right: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 whitesmoke, stop\: 0.239 whitesmoke, stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 whitesmoke stop\: 1 whitesmoke);
+  background: darkgray;
+}
+.button--remove, .button--clear {
+  border: 3 solid crimson;
+  border-bottom: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 crimson, stop\: 0.0621578947 crimson, stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 crimson stop\: 1 crimson);
+  border-top: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 crimson, stop\: 0.0621578947 crimson, stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 crimson stop\: 1 crimson);
+  border-left: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 crimson, stop\: 0.239 crimson, stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 crimson stop\: 1 crimson);
+  border-right: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 crimson, stop\: 0.239 crimson, stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 crimson stop\: 1 crimson);
+  background: darkred;
+}
+.button--remove {
+  padding: 4px 0px;
+  border: 3 solid crimson;
+  border-bottom: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 crimson, stop\: 0.0823333333 crimson, stop\: 0.0833333333 transparent, stop\: 0.9166666667 transparent, stop\: 0.9176666667 crimson stop\: 1 crimson);
+  border-top: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 crimson, stop\: 0.0823333333 crimson, stop\: 0.0833333333 transparent, stop\: 0.9166666667 transparent, stop\: 0.9176666667 crimson stop\: 1 crimson);
+  border-left: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 crimson, stop\: 0.2095263158 crimson, stop\: 0.2105263158 transparent, stop\: 0.7894736842 transparent, stop\: 0.7904736842 crimson stop\: 1 crimson);
+  border-right: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 crimson, stop\: 0.2095263158 crimson, stop\: 0.2105263158 transparent, stop\: 0.7894736842 transparent, stop\: 0.7904736842 crimson stop\: 1 crimson);
+  min-height: 24px;
+  min-width: 96px;
+  font: 600 18px "Titillium Web";
+}
+.button--add {
+  border: 3 solid mediumseagreen;
+  border-bottom: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 mediumseagreen, stop\: 0.0774313725 mediumseagreen, stop\: 0.0784313725 transparent, stop\: 0.9215686275 transparent, stop\: 0.9225686275 mediumseagreen stop\: 1 mediumseagreen);
+  border-top: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 mediumseagreen, stop\: 0.0774313725 mediumseagreen, stop\: 0.0784313725 transparent, stop\: 0.9215686275 transparent, stop\: 0.9225686275 mediumseagreen stop\: 1 mediumseagreen);
+  border-left: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 mediumseagreen, stop\: 0.2342941176 mediumseagreen, stop\: 0.2352941176 transparent, stop\: 0.7647058824 transparent, stop\: 0.7657058824 mediumseagreen stop\: 1 mediumseagreen);
+  border-right: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 mediumseagreen, stop\: 0.2342941176 mediumseagreen, stop\: 0.2352941176 transparent, stop\: 0.7647058824 transparent, stop\: 0.7657058824 mediumseagreen stop\: 1 mediumseagreen);
+  background: darkgreen;
+  padding: 2px 0px;
+  max-height: 34px;
+  min-width: 96px;
+}
+
+.group {
+  border: 4 solid "#545454";
+  background: "#212121";
+  color: whitesmoke;
+  padding: 16px;
+  padding-top: 24px;
+  margin-top: 24px;
+  font: 600 18px "Titillium Web";
+}
+.group::title {
+  border: 4 solid "#808080";
+  border-top: none;
+  border-bottom: none;
+  background: "#545454";
+  padding: 0 8px;
+  subcontrol-origin: padding;
+  subcontrol-position: top left;
+  top: -3ex;
+  left: 16px;
+  font: 600 18px "Titillium Web";
+}
+
+.frame.frame--words {
+  background: "#545454";
+  padding: 0px 0;
+  border: none;
+  outline: none;
+}
+
+.frame.frame--info {
+  padding: 8px;
+  padding-top: 4px;
+  border: none;
+  outline: none;
+}
+.frame.frame--info QLabel {
+  padding: 4px;
+  color: whitesmoke;
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid whitesmoke;
+  text-indent: 20px;
+}
+.frame.frame--info .label--last {
+  border: none;
+}
+
+.scroll-area {
+  border: none;
+  background: "#545454";
+}
+
+#scroll-area-info {
+  border-radius: 8px;
+}
+
+#scroll-area-word-list {
+  border: 4 solid "#808080";
+}
+
+.scroll-area.scroll-area--with-scroll-bar {
+  padding-right: 8px;
+}
+
+.scroll-area.scroll-area--without-scroll-bar {
+  padding-right: 0px;
+}
+
+.text-edit.text-edit--with-scroll-bar {
+  padding-right: 8px;
+}
+
+.text-edit.text-edit--without-scroll-bar {
+  padding-right: 0px;
+}
+
+QScrollBar:vertical {
+  width: 24px;
+  margin: 32px 0 32px 8px;
+  border-radius: 4px;
+  background-color: "#343434";
+}
+
+QScrollBar::handle:vertical {
+  background: "#A9A9A9";
+  height: 4px;
+  border-radius: 4px;
+}
+QScrollBar::handle:vertical:hover {
+  background: deepskyblue;
+}
+QScrollBar::handle:vertical:hover:pressed {
+  background: whitesmoke;
+}
+
+QScrollBar::sub-line:vertical,
+QScrollBar::add-line:vertical {
+  height: 16px;
+  width: 16px;
+  subcontrol-origin: margin;
+  background: "#A9A9A9";
+  border-radius: 4px;
+}
+QScrollBar::sub-line:vertical:hover,
+QScrollBar::add-line:vertical:hover {
+  background: deepskyblue;
+}
+QScrollBar::sub-line:vertical:hover:pressed,
+QScrollBar::add-line:vertical:hover:pressed {
+  background: whitesmoke;
+}
+
+QScrollBar::sub-line:vertical {
+  margin: 8px 0 4px 8px;
+  -o-border-image: url(assets/images/caret_up.svg) 0 0 0 0 stretch stretch;
+     border-image: url(assets/images/caret_up.svg) 0 0 0 0 stretch stretch;
+  subcontrol-position: top;
+}
+QScrollBar::sub-line:vertical:hover {
+  -o-border-image: url(assets/images/caret_up_alt.svg) 0 0 0 0 stretch stretch;
+     border-image: url(assets/images/caret_up_alt.svg) 0 0 0 0 stretch stretch;
+}
+QScrollBar::sub-line:vertical:hover:pressed {
+  -o-border-image: url(assets/images/caret_up.svg) 0 0 0 0 stretch stretch;
+     border-image: url(assets/images/caret_up.svg) 0 0 0 0 stretch stretch;
+}
+
+QScrollBar::add-line:vertical {
+  margin: 4px 0 8px 8px;
+  -o-border-image: url(assets/images/caret_down.svg) 0 0 0 0 stretch stretch;
+     border-image: url(assets/images/caret_down.svg) 0 0 0 0 stretch stretch;
+  subcontrol-position: bottom;
+}
+QScrollBar::add-line:vertical:hover {
+  -o-border-image: url(assets/images/caret_down_alt.svg) 0 0 0 0 stretch stretch;
+     border-image: url(assets/images/caret_down_alt.svg) 0 0 0 0 stretch stretch;
+}
+QScrollBar::add-line:vertical:hover:pressed {
+  -o-border-image: url(assets/images/caret_down.svg) 0 0 0 0 stretch stretch;
+     border-image: url(assets/images/caret_down.svg) 0 0 0 0 stretch stretch;
+}
+
+.text-edit QScrollBar::handle:vertical,
+.text-edit QScrollBar::add-line:vertical,
+.text-edit QScrollBar::sub-line:vertical {
+  background: "#696969";
+}
+.text-edit QScrollBar::handle:vertical:hover,
+.text-edit QScrollBar::add-line:vertical:hover,
+.text-edit QScrollBar::sub-line:vertical:hover {
+  background: deepskyblue;
+}
+.text-edit QScrollBar::handle:vertical:hover:pressed,
+.text-edit QScrollBar::add-line:vertical:hover:pressed,
+.text-edit QScrollBar::sub-line:vertical:hover:pressed {
+  background: darkgray;
+}
+.text-edit QScrollBar::sub-line:vertical {
+  -o-border-image: url(assets/images/caret_up_alt.svg) 0 0 0 0 stretch stretch;
+     border-image: url(assets/images/caret_up_alt.svg) 0 0 0 0 stretch stretch;
+}
+.text-edit QScrollBar::add-line:vertical {
+  -o-border-image: url(assets/images/caret_down_alt.svg) 0 0 0 0 stretch stretch;
+     border-image: url(assets/images/caret_down_alt.svg) 0 0 0 0 stretch stretch;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+  background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none;
+}
+
+.small-word {
+  background: transparent;
+}
+.small-word__frame--odd {
+  background: "#343434";
+}
+.small-word__frame--odd .small-word__label {
+  color: whitesmoke;
+}
+.small-word__frame--odd .small-word__label--index {
+  border: 2px solid "#C0C0C0";
+  border-top: none;
+  border-bottom: none;
+  border-left-width: 8px;
+}
+.small-word__frame--even {
+  background: "#C0C0C0";
+}
+.small-word__frame--even .small-word__label {
+  color: "#121212";
+}
+.small-word__frame--even .small-word__label--index {
+  border: 2px solid "#343434";
+  border-top: none;
+  border-bottom: none;
+  border-left-width: 8px;
+}
+.small-word__label--word {
+  padding: 0 8px;
+}
+.small-word__label--index {
+  min-width: 2em;
+  padding: 0 8px;
+}
+
+* {
+  font: 500 16px "Titillium Web";
+  color: "#121212";
+}
+
+#main-window {
+  background: "#212121";
+}
+
+#tabs::pane {
+  padding: 8px 12px 12px 12px;
+  background: "#343434";
+  border: none;
+}
+#tabs QTabBar::tab {
+  width: 160px;
+  height: 32px;
+  border: 4px solid "#545454";
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background: "#424242";
+  color: whitesmoke;
+  font: 600 20px "Titillium Web";
+}
+#tabs QTabBar::tab:selected, #tabs QTabBar::tab:selected:hover, #tabs QTabBar::tab:selected:pressed {
+  border: 4 solid mediumseagreen;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background: darkgreen;
+  color: whitesmoke;
+}
+#tabs QTabBar::tab:hover {
+  border: 4 solid deepskyblue;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background: royalblue;
+  color: whitesmoke;
+}
+#tabs QTabBar::tab:hover:pressed {
+  border: 2px solid whitesmoke 4;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background: darkgray;
+  color: "#121212";
+}
+
+#text-edit {
+  border-radius: 8px;
+  font: 500 20px "Titillium Web";
+}
+
+#line-edit {
+  border-radius: 4px;
+  font: 500 16px "Titillium Web";
+}
+
+#text-edit,
+#line-edit {
+  border: 3 solid "#808080";
+  background: whitesmoke;
+  color: "#121212";
+  selection-color: whitesmoke;
+  selection-background-color: mediumseagreen;
+}
+#text-edit:focus,
+#line-edit:focus {
+  border: 3 solid mediumseagreen;
+}/*# sourceMappingURL=styles.css.map */
