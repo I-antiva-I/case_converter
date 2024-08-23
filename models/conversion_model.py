@@ -20,23 +20,23 @@ class ConversionModel:
         return string.upper()
 
     @staticmethod
-    def text_lower_case(string: str) -> str:
+    def to_lower_case(string: str) -> str:
         return string.lower()
 
     @staticmethod
-    def text_inverse_case(string: str) -> str:
+    def to_inverse_case(string: str) -> str:
         return "".join([char.lower() if char.isupper() else char.upper() for char in string])
 
     @staticmethod
-    def text_sentence_case(string: str) -> str:
+    def to_sentence_case(string: str) -> str:
         return string[0].upper()+(string[1:].lower())
 
     @staticmethod
-    def text_capitalized_case(string: str) -> str:
+    def to_capitalized_case(string: str) -> str:
         return string.title()
 
     @staticmethod
-    def text_title_case(string: str, small_words: Set[str] = None) -> str:
+    def to_title_case(string: str, small_words: Set[str] = None) -> str:
         words = string.lower().split()
 
         titled_words = [words[0].capitalize()]

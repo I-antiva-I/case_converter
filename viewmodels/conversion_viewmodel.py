@@ -78,19 +78,19 @@ class ConversionViewModel(QObject, IViewModel):
         self._view.text_edit.setText(self.model.to_upper_case(self.model.text))
 
     def _on_button_lower_case_clicked(self):
-        self._view.text_edit.setText(self.model.text_lower_case(self.model.text))
+        self._view.text_edit.setText(self.model.to_lower_case(self.model.text))
 
     def _on_button_inverse_case_clicked(self):
-        self._view.text_edit.setText(self.model.text_inverse_case(self.model.text))
+        self._view.text_edit.setText(self.model.to_inverse_case(self.model.text))
 
     def _on_button_capitalized_case_clicked(self):
-        self._view.text_edit.setText(self.model.text_capitalized_case(self.model.text))
+        self._view.text_edit.setText(self.model.to_capitalized_case(self.model.text))
 
     def _on_button_title_case_clicked(self):
-        self._view.text_edit.setText(self.model.text_title_case(self.model.text, self._SHARED_DATA.small_words))
+        self._view.text_edit.setText(self.model.to_title_case(self.model.text, self._SHARED_DATA.small_words))
 
     def _on_button_sentence_case_clicked(self):
-        self._view.text_edit.setText(self.model.text_sentence_case(self.model.text))
+        self._view.text_edit.setText(self.model.to_sentence_case(self.model.text))
 
     def _on_text_changed(self):
         self.text = self._view.text_edit.toPlainText()
