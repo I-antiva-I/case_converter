@@ -24,12 +24,12 @@
   &--add
 
   */
-  border: 3 solid "#696969";
-  border-bottom: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 "#696969", stop\: 0.0621578947 "#696969", stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 "#696969" stop\: 1 "#696969");
-  border-top: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 "#696969", stop\: 0.0621578947 "#696969", stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 "#696969" stop\: 1 "#696969");
-  border-left: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 "#696969", stop\: 0.239 "#696969", stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 "#696969" stop\: 1 "#696969");
-  border-right: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 "#696969", stop\: 0.239 "#696969", stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 "#696969" stop\: 1 "#696969");
-  background: "#424242";
+  border: 3 solid #696969;
+  border-bottom: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 #696969, stop\: 0.0621578947 #696969, stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 #696969 stop\: 1 #696969);
+  border-top: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 1, y2\: 0, stop\: 0 #696969, stop\: 0.0621578947 #696969, stop\: 0.0631578947 transparent, stop\: 0.9368421053 transparent, stop\: 0.9378421053 #696969 stop\: 1 #696969);
+  border-left: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 #696969, stop\: 0.239 #696969, stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 #696969 stop\: 1 #696969);
+  border-right: 3 solid qlineargradient(x1\: 0, y1\: 0, x2\: 0, y2\: 1, stop\: 0 #696969, stop\: 0.239 #696969, stop\: 0.24 transparent, stop\: 0.76 transparent, stop\: 0.761 #696969 stop\: 1 #696969);
+  background: #424242;
   color: whitesmoke;
   padding: 8px 0px;
   min-height: 24px;
@@ -84,8 +84,8 @@
 }
 
 .group {
-  border: 4 solid "#545454";
-  background: "#212121";
+  border: 4 solid #545454;
+  background: #212121;
   color: whitesmoke;
   padding: 16px;
   padding-top: 24px;
@@ -93,10 +93,10 @@
   font: 600 18px "Titillium Web";
 }
 .group::title {
-  border: 4 solid "#808080";
+  border: 4 solid #808080;
   border-top: none;
   border-bottom: none;
-  background: "#545454";
+  background: #545454;
   padding: 0 8px;
   subcontrol-origin: padding;
   subcontrol-position: top left;
@@ -106,10 +106,12 @@
 }
 
 .frame.frame--words {
-  background: "#545454";
-  padding: 0px 0;
+  background: transparent;
+  padding: 8px;
+  padding-right: 0;
   border: none;
   outline: none;
+  border-top-left-radius: 8px;
 }
 
 .frame.frame--info {
@@ -132,7 +134,7 @@
 
 .scroll-area {
   border: none;
-  background: "#545454";
+  background: #545454;
 }
 
 #scroll-area-info {
@@ -140,7 +142,8 @@
 }
 
 #scroll-area-word-list {
-  border: 4 solid "#808080";
+  border-radius: 8px;
+  background: #545454;
 }
 
 .scroll-area.scroll-area--with-scroll-bar {
@@ -163,11 +166,11 @@ QScrollBar:vertical {
   width: 24px;
   margin: 32px 0 32px 8px;
   border-radius: 4px;
-  background-color: "#343434";
+  background-color: #343434;
 }
 
 QScrollBar::handle:vertical {
-  background: "#A9A9A9";
+  background: #A9A9A9;
   height: 4px;
   border-radius: 4px;
 }
@@ -183,7 +186,7 @@ QScrollBar::add-line:vertical {
   height: 16px;
   width: 16px;
   subcontrol-origin: margin;
-  background: "#A9A9A9";
+  background: #A9A9A9;
   border-radius: 4px;
 }
 QScrollBar::sub-line:vertical:hover,
@@ -197,38 +200,32 @@ QScrollBar::add-line:vertical:hover:pressed {
 
 QScrollBar::sub-line:vertical {
   margin: 8px 0 4px 8px;
-  -o-border-image: url(assets/images/caret_up.svg) 0 0 0 0 stretch stretch;
-     border-image: url(assets/images/caret_up.svg) 0 0 0 0 stretch stretch;
+  border-image: url(assets/images/caret_up.svg) 0 0 0 0 stretch stretch;
   subcontrol-position: top;
 }
 QScrollBar::sub-line:vertical:hover {
-  -o-border-image: url(assets/images/caret_up_alt.svg) 0 0 0 0 stretch stretch;
-     border-image: url(assets/images/caret_up_alt.svg) 0 0 0 0 stretch stretch;
+  border-image: url(assets/images/caret_up_alt.svg) 0 0 0 0 stretch stretch;
 }
 QScrollBar::sub-line:vertical:hover:pressed {
-  -o-border-image: url(assets/images/caret_up.svg) 0 0 0 0 stretch stretch;
-     border-image: url(assets/images/caret_up.svg) 0 0 0 0 stretch stretch;
+  border-image: url(assets/images/caret_up.svg) 0 0 0 0 stretch stretch;
 }
 
 QScrollBar::add-line:vertical {
   margin: 4px 0 8px 8px;
-  -o-border-image: url(assets/images/caret_down.svg) 0 0 0 0 stretch stretch;
-     border-image: url(assets/images/caret_down.svg) 0 0 0 0 stretch stretch;
+  border-image: url(assets/images/caret_down.svg) 0 0 0 0 stretch stretch;
   subcontrol-position: bottom;
 }
 QScrollBar::add-line:vertical:hover {
-  -o-border-image: url(assets/images/caret_down_alt.svg) 0 0 0 0 stretch stretch;
-     border-image: url(assets/images/caret_down_alt.svg) 0 0 0 0 stretch stretch;
+  border-image: url(assets/images/caret_down_alt.svg) 0 0 0 0 stretch stretch;
 }
 QScrollBar::add-line:vertical:hover:pressed {
-  -o-border-image: url(assets/images/caret_down.svg) 0 0 0 0 stretch stretch;
-     border-image: url(assets/images/caret_down.svg) 0 0 0 0 stretch stretch;
+  border-image: url(assets/images/caret_down.svg) 0 0 0 0 stretch stretch;
 }
 
 .text-edit QScrollBar::handle:vertical,
 .text-edit QScrollBar::add-line:vertical,
 .text-edit QScrollBar::sub-line:vertical {
-  background: "#696969";
+  background: #696969;
 }
 .text-edit QScrollBar::handle:vertical:hover,
 .text-edit QScrollBar::add-line:vertical:hover,
@@ -241,12 +238,10 @@ QScrollBar::add-line:vertical:hover:pressed {
   background: darkgray;
 }
 .text-edit QScrollBar::sub-line:vertical {
-  -o-border-image: url(assets/images/caret_up_alt.svg) 0 0 0 0 stretch stretch;
-     border-image: url(assets/images/caret_up_alt.svg) 0 0 0 0 stretch stretch;
+  border-image: url(assets/images/caret_up_alt.svg) 0 0 0 0 stretch stretch;
 }
 .text-edit QScrollBar::add-line:vertical {
-  -o-border-image: url(assets/images/caret_down_alt.svg) 0 0 0 0 stretch stretch;
-     border-image: url(assets/images/caret_down_alt.svg) 0 0 0 0 stretch stretch;
+  border-image: url(assets/images/caret_down_alt.svg) 0 0 0 0 stretch stretch;
 }
 
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
@@ -261,25 +256,25 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
   background: transparent;
 }
 .small-word__frame--odd {
-  background: "#343434";
+  background: #343434;
 }
 .small-word__frame--odd .small-word__label {
   color: whitesmoke;
 }
 .small-word__frame--odd .small-word__label--index {
-  border: 2px solid "#C0C0C0";
+  border: 2px solid #DCDCDC;
   border-top: none;
   border-bottom: none;
   border-left-width: 8px;
 }
 .small-word__frame--even {
-  background: "#C0C0C0";
+  background: #212121;
 }
 .small-word__frame--even .small-word__label {
-  color: "#121212";
+  color: whitesmoke;
 }
 .small-word__frame--even .small-word__label--index {
-  border: 2px solid "#343434";
+  border: 2px solid #DCDCDC;
   border-top: none;
   border-bottom: none;
   border-left-width: 8px;
@@ -294,26 +289,26 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 
 * {
   font: 500 16px "Titillium Web";
-  color: "#121212";
+  color: #121212;
 }
 
 #main-window {
-  background: "#212121";
+  background: #212121;
 }
 
 #tabs::pane {
   padding: 8px 12px 12px 12px;
-  background: "#343434";
+  background: #343434;
   border: none;
 }
 #tabs QTabBar::tab {
   width: 160px;
   height: 32px;
-  border: 4px solid "#545454";
+  border: 4px solid #545454;
   border-top: none;
   border-right: none;
   border-left: none;
-  background: "#424242";
+  background: #424242;
   color: whitesmoke;
   font: 600 20px "Titillium Web";
 }
@@ -339,7 +334,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
   border-right: none;
   border-left: none;
   background: darkgray;
-  color: "#121212";
+  color: #121212;
 }
 
 #text-edit {
@@ -354,9 +349,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 
 #text-edit,
 #line-edit {
-  border: 3 solid "#808080";
+  border: 3 solid #808080;
   background: whitesmoke;
-  color: "#121212";
+  color: #121212;
   selection-color: whitesmoke;
   selection-background-color: mediumseagreen;
 }

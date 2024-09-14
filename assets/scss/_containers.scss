@@ -38,10 +38,14 @@
 // Frames
 .frame.frame--words
 {
-    background: vars.$color--elevation-level-4;
-    padding: 0px 0;
+    background: transparent;
+    padding: 8px;
+    padding-right: 0;
+
     border: none;
     outline: none;
+    
+    border-top-left-radius: 8px;
 }
 
 .frame.frame--info

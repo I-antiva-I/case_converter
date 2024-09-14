@@ -14,7 +14,10 @@
 
 #scroll-area-word-list
 { 
-    @include mixins.border(vars.$color--elevation-level-6, 4);
+   // @include mixins.border(vars.$color--elevation-level-4, 4);
+    border-radius: 8px;
+    background: vars.$color--elevation-level-4;
+
 }
 
 .scroll-area.scroll-area--with-scroll-bar

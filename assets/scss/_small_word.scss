@@ -17,7 +17,7 @@
 
                 &--index
                 {
-                    @include mixins.border($borders: "0101", $color: vars.$color--elevation-level-8);
+                    @include mixins.border($borders: "0101", $color: vars.$color--elevation-level-9);
                     border-left-width: 8px;
                 }
 
@@ -25,16 +25,16 @@
         }
         &--even
         {
-            background: vars.$color--elevation-level-8;
+            background: vars.$color--elevation-level-1;
       
 
             & .small-word__label
             {
-                color: vars.$color--font-default-alt;
+                color: vars.$color--font-default;
 
                 &--index
                 {
-                    @include mixins.border($borders: "0101", $color: vars.$color--elevation-level-2);
+                    @include mixins.border($borders: "0101", $color: vars.$color--elevation-level-9);
                     border-left-width: 8px;
                 }
             }
