@@ -1,38 +1,32 @@
 from abc import abstractmethod, ABCMeta
 
-from PyQt5.QtCore import QObject
 
-
-class IViewModelMeta(ABCMeta, type(QObject)):
+class IViewModelMeta(ABCMeta):
     pass
 
 
-class IViewModel:
-    __metaclass__ = IViewModelMeta
-
-    @property
-    @abstractmethod
-    def view(self):
-        pass
-
-    @view.setter
-    @abstractmethod
-    def view(self, value):
-        pass
-
+class IViewModel(metaclass=IViewModelMeta):
     @property
     @abstractmethod
     def model(self):
+        """
+        Abstract getter for the model.
+        """
         pass
 
     @model.setter
     @abstractmethod
     def model(self, value):
+        """
+        Abstract setter for the model.
+        """
         pass
 
-    # [i] Should be read only
     @property
     @abstractmethod
     def shared_data(self):
+        """
+        Abstract getter for the shared data.
+        """
         pass
 

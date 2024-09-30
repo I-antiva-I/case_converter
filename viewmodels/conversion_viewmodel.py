@@ -7,42 +7,20 @@ from interfaces.i_viewmodel import IViewModel, IViewModelMeta
 from views.conversion_view import ConversionView
 
 
-class ConversionViewModel(QObject, IViewModel):
-    __metaclass__ = IViewModelMeta
-
+class ConversionViewModel(IViewModel, metaclass=IViewModelMeta):
     # Signals
     text_modified = pyqtSignal(str)
+    copy_text_signal = pyqtSignal(str)
+    paste_text_signal = pyqtSignal()
+    clear_text_signal = pyqtSignal()
 
-    def __init__(self, view: ConversionView, model: ConversionModel, shared_data: SharedDataModel = None):
+    def __init__(self, model: ConversionModel, shared_data: SharedDataModel = None):
         super().__init__()
 
-        self.view = view
         self.model = model
         self._SHARED_DATA = shared_data
 
-        # Signal connection
-        self.view.button_upper_case.clicked.connect(lambda: self._on_button_upper_case_clicked())
-        self.view.button_lower_case.clicked.connect(lambda: self._on_button_lower_case_clicked())
-        self.view.button_inverse_case.clicked.connect(lambda: self._on_button_inverse_case_clicked())
-        self.view.button_sentence_case.clicked.connect(lambda: self._on_button_sentence_case_clicked())
-        self.view.button_capitalized_case.clicked.connect(lambda: self._on_button_capitalized_case_clicked())
-        self.view.button_title_case.clicked.connect(lambda: self._on_button_title_case_clicked())
-        
-        self.view.text_edit.textChanged.connect(self._on_text_changed)
-
-        self.view.button_copy_text.clicked.connect(lambda: self._on_button_copy_clicked())
-        self.view.button_paste_text.clicked.connect(lambda: self._on_button_paste_clicked())
-        self.view.button_clear_text.clicked.connect(lambda: self._on_button_clear_clicked())
-
-    # <editor-fold desc="[+] View & Model">
-
-    @property
-    def view(self) -> ConversionView:
-        return self._view
-
-    @view.setter
-    def view(self, value : ConversionView):
-        self._view = value
+    # <editor-fold desc="[+] Model">
 
     @property
     def model(self) -> ConversionModel:
@@ -72,36 +50,36 @@ class ConversionViewModel(QObject, IViewModel):
 
     # </editor-fold>
 
-    # <editor-fold desc="[+] Signal Slots">
+    # <editor-fold desc="[+] Commands">
 
-    def _on_button_upper_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_upper_case(self.model.text))
+    def set_upper_case(self):
+        self.text = self.model.to_upper_case(self.model.text)
 
-    def _on_button_lower_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_lower_case(self.model.text))
+    def set_lower_case(self):
+        self.text = self.model.to_lower_case(self.model.text)
 
-    def _on_button_inverse_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_inverse_case(self.model.text))
+    def set_inverse_case(self):
+        self.text = self.model.to_inverse_case(self.model.text)
 
-    def _on_button_capitalized_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_capitalized_case(self.model.text))
+    def set_capitalized_case(self):
+        self.text = self.model.to_capitalized_case(self.model.text)
 
-    def _on_button_title_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_title_case(self.model.text, self._SHARED_DATA.small_words))
+    def set_title_case(self):
+        self.text = self.model.to_title_case(self.model.text, self._SHARED_DATA.small_words)
 
-    def _on_button_sentence_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_sentence_case(self.model.text))
+    def set_sentence_case(self):
+        self.text = self.model.to_sentence_case(self.model.text)
 
-    def _on_text_changed(self):
-        self.text = self._view.text_edit.toPlainText()
+    def copy_text(self):
+        #pyperclip.copy(self._view.text_edit.toPlainText())
+        pass
 
-    def _on_button_copy_clicked(self):
-        pyperclip.copy(self._view.text_edit.toPlainText())
+    def paste_text(self):
+        #self._view.text_edit.setPlainText(pyperclip.paste())
+        pass
 
-    def _on_button_paste_clicked(self):
-        self._view.text_edit.setPlainText(pyperclip.paste())
-
-    def _on_button_clear_clicked(self):
-        self._view.text_edit.setPlainText("")
+    def paste_text(self):
+        #self._view.text_edit.setPlainText("")
+        pass
 
     # </editor-fold>

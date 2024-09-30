@@ -3,22 +3,45 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QGroupBox, QGridLayout, QHBoxLayout, QTextEdit, QSizePolicy, \
     QGraphicsDropShadowEffect
 
+from interfaces.i_view import IViewMeta, IView
 from managers.scroll_bar_manager import manage_scroll_bar
+from viewmodels.conversion_viewmodel import ConversionViewModel
 
 
-class ConversionView(QWidget):
-    def __init__(self):
+class ConversionView(IView, metaclass=IViewMeta):
+    def __init__(self, viewmodel: ConversionViewModel):
         super().__init__()
 
-        # [i] Buttons and TextEdit should be public, in order for viewmodel to access them
+        self.viewmodel = viewmodel
 
-        # <editor-fold desc="[+] Case buttons">
+        # <editor-fold desc="[+] Buttons">
+
         self.button_upper_case = QPushButton("Upper Case")
         self.button_lower_case = QPushButton("Lower Case")
-        self.button_inverse_case = QPushButton("Reverse Case")
+        self.button_inverse_case = QPushButton("Inverse Case")
         self.button_sentence_case = QPushButton("Sentence Case")
         self.button_capitalized_case = QPushButton("Capitalized Case")
         self.button_title_case = QPushButton("Title Case")
+        self.button_copy_text = QPushButton("Copy")
+        self.button_paste_text = QPushButton("Paste")
+        self.button_clear_text = QPushButton("Clear")
+
+        self.button_upper_case.clicked.connect(self._on_button_upper_case_clicked)
+        self.button_lower_case.clicked.connect(self._on_button_lower_case_clicked)
+        self.button_inverse_case.clicked.connect(self._on_button_inverse_case_clicked)
+        self.button_sentence_case.clicked.connect(self._on_button_sentence_case_clicked)
+        self.button_capitalized_case.clicked.connect(self._on_button_capitalize_case_clicked)
+        self.button_title_case.clicked.connect(self._on_button_title_case_clicked)
+        self.button_copy_text.clicked.connect(self._on_button_copy_clicked)
+        self.button_paste_text.clicked.connect(self._on_button_paste_clicked)
+        self.button_clear_text.clicked.connect(self._on_button_clear_clicked)
+
+        # </editor-fold>
+
+        
+
+
+
 
         group_case_buttons = QGroupBox("Case Transformations")
         group_case_buttons.setLayout(QGridLayout())
@@ -32,13 +55,11 @@ class ConversionView(QWidget):
         group_case_layout.addWidget(self.button_capitalized_case, 1, 1, 1, 1)
         group_case_layout.addWidget(self.button_title_case, 1, 2, 1, 1)
 
-        # </editor-fold>
+
 
         # <editor-fold desc="[+] Text control buttons">
 
-        self.button_copy_text = QPushButton("Copy")
-        self.button_paste_text = QPushButton("Paste")
-        self.button_clear_text = QPushButton("Clear")
+
 
         group_control_buttons = QGroupBox("Controls")
         group_control_buttons.setLayout(QGridLayout())
@@ -99,3 +120,43 @@ class ConversionView(QWidget):
         # Signal Connection
         self.text_edit.verticalScrollBar().rangeChanged.\
             connect(lambda min_v, max_v: manage_scroll_bar(self.text_edit, "text-edit", max_v))
+
+
+    # <editor-fold desc="[+] Viewmodel">
+
+    @property
+    def viewmodel(self) -> ConversionViewModel:
+        return self._viewmodel
+
+    @viewmodel.setter
+    def viewmodel(self, value : ConversionViewModel):
+        self._viewmodel = value
+
+    # </editor-fold>
+
+    def _on_button_upper_case_clicked(self):
+        self.viewmodel.set_upper_case()
+
+    def _on_button_lower_case_clicked(self):
+        self.viewmodel.set_lower_case()
+
+    def _on_button_title_case_clicked(self):
+        self.viewmodel.set_title_case()
+
+    def _on_button_inverse_case_clicked(self):
+        self.viewmodel.set_inverse_case()
+
+    def _on_button_sentence_case_clicked(self):
+        self.viewmodel.set_sentence_case()
+
+    def _on_button_capitalize_case_clicked(self):
+        self.viewmodel.set_capitalized_case()
+
+    def _on_button_copy_clicked(self):
+        pass
+
+    def _on_button_paste_clicked(self):
+        pass
+
+    def _on_button_clear_clicked(self):
+        pass
