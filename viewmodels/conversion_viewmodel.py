@@ -1,18 +1,27 @@
+from __future__ import annotations
 import pyperclip
 from PyQt5.QtCore import QObject, pyqtProperty, pyqtSignal
 
+from enums.case_type import CaseType
+from enums.control_type import ControlType
+
 from models.shared_data_model import SharedDataModel
 from models.conversion_model import ConversionModel
+
 from interfaces.i_viewmodel import IViewModel, IViewModelMeta
-from views.conversion_view import ConversionView
 
 
-class ConversionViewModel(IViewModel, metaclass=IViewModelMeta):
-    # Signals
+class ConversionViewModel(QObject, IViewModel, metaclass=IViewModelMeta):
+
+    # <editor-fold desc="[+] Signals">
+
+    # Signal for property changes
+    text_updated = pyqtSignal(str)
+
+    # Signal to notify QTextEdit
     text_modified = pyqtSignal(str)
-    copy_text_signal = pyqtSignal(str)
-    paste_text_signal = pyqtSignal()
-    clear_text_signal = pyqtSignal()
+
+    # </editor-fold>
 
     def __init__(self, model: ConversionModel, shared_data: SharedDataModel = None):
         super().__init__()
@@ -38,7 +47,7 @@ class ConversionViewModel(IViewModel, metaclass=IViewModelMeta):
 
     # <editor-fold desc="[+] Model Properties">
 
-    @pyqtProperty(type=str, notify=text_modified)
+    @pyqtProperty(type=str, notify=text_updated)
     def text(self) -> str:
         return self._model.text
 
@@ -46,40 +55,51 @@ class ConversionViewModel(IViewModel, metaclass=IViewModelMeta):
     def text(self, value) -> None:
         if self._model.text != value:
             self._model.text = value
-            self.text_modified.emit(value)
+            self.text_updated.emit(value)
 
     # </editor-fold>
 
     # <editor-fold desc="[+] Commands">
 
-    def set_upper_case(self):
-        self.text = self.model.to_upper_case(self.model.text)
+    def text_to_case(self, case_type: CaseType):
 
-    def set_lower_case(self):
-        self.text = self.model.to_lower_case(self.model.text)
+        if case_type is CaseType.UPPER:
+            self.text = self.model.to_upper_case(self.text)
 
-    def set_inverse_case(self):
-        self.text = self.model.to_inverse_case(self.model.text)
+        elif case_type is CaseType.LOWER:
+            self.text = self.model.to_lower_case(self.text)
 
-    def set_capitalized_case(self):
-        self.text = self.model.to_capitalized_case(self.model.text)
+        elif case_type is CaseType.INVERSE:
+            self.text = self.model.to_inverse_case(self.text)
 
-    def set_title_case(self):
-        self.text = self.model.to_title_case(self.model.text, self._SHARED_DATA.small_words)
+        elif case_type is CaseType.SENTENCE:
+            self.text = self.model.to_sentence_case(self.text)
 
-    def set_sentence_case(self):
-        self.text = self.model.to_sentence_case(self.model.text)
+        elif case_type is CaseType.CAPITALIZED:
+            self.text = self.model.to_capitalized_case(self.text)
 
-    def copy_text(self):
-        #pyperclip.copy(self._view.text_edit.toPlainText())
-        pass
+        elif case_type is CaseType.TITLE:
+            self.text = self.model.to_title_case(self.text, self._SHARED_DATA.small_words)
 
-    def paste_text(self):
-        #self._view.text_edit.setPlainText(pyperclip.paste())
-        pass
+        else:
+            raise ValueError("Unknown/Unsupported CaseType enum value "+str(case_type))
 
-    def paste_text(self):
-        #self._view.text_edit.setPlainText("")
-        pass
+        self.text_modified.emit(self.text)
+
+    def on_control_signal(self, control_type: ControlType):
+
+        if control_type is ControlType.CLEAR:
+            self.text = ""
+            self.text_modified.emit(self.text)
+
+        elif control_type is ControlType.COPY:
+            pyperclip.copy(text=self.text)
+
+        elif control_type is ControlType.PASTE:
+            self.text = pyperclip.paste()
+            self.text_modified.emit(self.text)
+
+        else:
+            raise ValueError("Unknown/Unsupported ControlType enum value "+str(control_type))
 
     # </editor-fold>
