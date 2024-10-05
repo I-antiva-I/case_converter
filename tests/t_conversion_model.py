@@ -2,6 +2,10 @@ import pytest
 
 from models.conversion_model import ConversionModel
 
+"""
+Unit tests for ConversionModel
+"""
+
 
 # <editor-fold desc="[+] Test | to_upper_case">
 @pytest.mark.parametrize("input_string, expected_string", [
@@ -9,7 +13,9 @@ from models.conversion_model import ConversionModel
     ("test", "TEST"),
     ("12345", "12345"),
     ("aBcDe", "ABCDE"),
-    ("Lorem ipsum dolor sit amet", "LOREM IPSUM DOLOR SIT AMET")
+    ("Lorem ipsum dolor sit amet", "LOREM IPSUM DOLOR SIT AMET"),
+    ("", ""),
+    ("\t\t  \n\n", "\t\t  \n\n")
 ])
 def test_to_upper_case(input_string: str, expected_string: str):
     model: ConversionModel = ConversionModel()
@@ -24,7 +30,9 @@ def test_to_upper_case(input_string: str, expected_string: str):
     ("TesT", "test"),
     ("12345", "12345"),
     ("aBcDe", "abcde"),
-    ("LOREM IPSUM DOLOR SIT AMET", "lorem ipsum dolor sit amet")
+    ("LOREM IPSUM DOLOR SIT AMET", "lorem ipsum dolor sit amet"),
+    ("", ""),
+    ("\t\t  \n\n", "\t\t  \n\n")
 ])
 def test_to_lower_case(input_string: str, expected_string: str):
     model: ConversionModel = ConversionModel()
@@ -39,7 +47,9 @@ def test_to_lower_case(input_string: str, expected_string: str):
     ("test", "TEST"),
     ("12345", "12345"),
     ("aBcDe", "AbCdE"),
-    ("Lorem ipsum dolor sit amet", "lOREM IPSUM DOLOR SIT AMET")
+    ("Lorem ipsum dolor sit amet", "lOREM IPSUM DOLOR SIT AMET"),
+    ("", ""),
+    ("\t\t  \n\n", "\t\t  \n\n")
 ])
 def test_to_inverse_case(input_string: str, expected_string: str):
     model: ConversionModel = ConversionModel()
@@ -54,7 +64,12 @@ def test_to_inverse_case(input_string: str, expected_string: str):
     ("test", "Test"),
     ("12345", "12345"),
     ("aBcDe", "Abcde"),
-    ("Lorem ipsum dolor sit amet", "Lorem Ipsum Dolor Sit Amet")
+    ("Lorem ipsum dolor sit amet", "Lorem Ipsum Dolor Sit Amet"),
+    ("Lorem ipsum dolor. sit amet", "Lorem Ipsum Dolor. Sit Amet"),
+    ("Lorem ipsum dolor. sit amet?", "Lorem Ipsum Dolor. Sit Amet?"),
+    ("Lorem 'ipsum', dolor. sit amet?", "Lorem 'Ipsum', Dolor. Sit Amet?"),
+    ("", ""),
+    ("\t\t  \n\n", "\t\t  \n\n")
 ])
 def test_to_capitalized_case(input_string: str, expected_string: str):
     model: ConversionModel = ConversionModel()
@@ -69,7 +84,12 @@ def test_to_capitalized_case(input_string: str, expected_string: str):
     ("TesT", "Test"),
     ("12345", "12345"),
     ("aBcDe", "Abcde"),
-    ("LOREM IPSUM DOLOR SIT AMET", "Lorem ipsum dolor sit amet")
+    ("LOREM IPSUM DOLOR SIT AMET", "Lorem ipsum dolor sit amet"),
+    ("Lorem ipsum dolor. sit amet", "Lorem ipsum dolor. Sit amet"),
+    ("Lorem ipsum dolor. sit amet?", "Lorem ipsum dolor. Sit amet?"),
+    ("Lorem 'ipsum', dolor. sit amet?", "Lorem 'ipsum', dolor. Sit amet?"),
+    ("", ""),
+    ("\t\t  \n\n", "\t\t  \n\n")
 ])
 def test_to_sentence_case(input_string: str, expected_string: str):
     model: ConversionModel = ConversionModel()
@@ -84,10 +104,15 @@ def test_to_sentence_case(input_string: str, expected_string: str):
     ("this is test", "This is Test"),
     ("12345", "12345"),
     ("aBcDe", "Abcde"),
-    ("Lorem ipsum dolor sit amet", "Lorem Ipsum Dolor Sit Amet")
+    ("Lorem ipsum dolor sit amet", "Lorem Ipsum dolor Sit Amet"),
+    ("Lorem ipsum 'dolor' sit amet?", "Lorem Ipsum 'dolor' Sit Amet?"),
+    ("Lorem 'ipsum', dolor sit! amet?", "Lorem 'Ipsum', dolor Sit! Amet?"),
+    ("", ""),
+    ("\t\t  \n\n", "\t\t  \n\n")
+
 ])
 def test_to_title_case(input_string: str, expected_string: str):
     model: ConversionModel = ConversionModel()
-    actual_string: str = model.to_title_case(input_string, {"Dolor", "is"})
+    actual_string: str = model.to_title_case(input_string, {"dolor", "is"})
     assert actual_string == expected_string
 # </editor-fold>

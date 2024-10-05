@@ -1,48 +1,38 @@
 import pyperclip
 from PyQt5.QtCore import QObject, pyqtProperty, pyqtSignal
 
+from enums.case_type import CaseType
+from enums.control_type import ControlType
 from models.shared_data_model import SharedDataModel
 from models.conversion_model import ConversionModel
 from interfaces.i_viewmodel import IViewModel, IViewModelMeta
-from views.conversion_view import ConversionView
 
 
-class ConversionViewModel(QObject, IViewModel):
-    __metaclass__ = IViewModelMeta
+class ConversionViewModel(QObject, IViewModel, metaclass=IViewModelMeta):
+    """
+    ConversionViewModel
+    The `ConversionViewModel` class provides communication between the view and the model,
+    and handles text transformations.
 
-    # Signals
+    """
+
+    # <editor-fold desc="[+] Signals">
+
+    # Signal emitted when the text property is updated.
+    text_updated = pyqtSignal(str)
+
+    # Signal emitted when the text is modified and needs to notify the view ('QTextEdit' widget)
     text_modified = pyqtSignal(str)
 
-    def __init__(self, view: ConversionView, model: ConversionModel, shared_data: SharedDataModel = None):
+    # </editor-fold>
+
+    def __init__(self, model: ConversionModel, shared_data: SharedDataModel = None):
         super().__init__()
 
-        self.view = view
         self.model = model
         self._SHARED_DATA = shared_data
 
-        # Signal connection
-        self.view.button_upper_case.clicked.connect(lambda: self._on_button_upper_case_clicked())
-        self.view.button_lower_case.clicked.connect(lambda: self._on_button_lower_case_clicked())
-        self.view.button_inverse_case.clicked.connect(lambda: self._on_button_inverse_case_clicked())
-        self.view.button_sentence_case.clicked.connect(lambda: self._on_button_sentence_case_clicked())
-        self.view.button_capitalized_case.clicked.connect(lambda: self._on_button_capitalized_case_clicked())
-        self.view.button_title_case.clicked.connect(lambda: self._on_button_title_case_clicked())
-        
-        self.view.text_edit.textChanged.connect(self._on_text_changed)
-
-        self.view.button_copy_text.clicked.connect(lambda: self._on_button_copy_clicked())
-        self.view.button_paste_text.clicked.connect(lambda: self._on_button_paste_clicked())
-        self.view.button_clear_text.clicked.connect(lambda: self._on_button_clear_clicked())
-
-    # <editor-fold desc="[+] View & Model">
-
-    @property
-    def view(self) -> ConversionView:
-        return self._view
-
-    @view.setter
-    def view(self, value : ConversionView):
-        self._view = value
+    # <editor-fold desc="[+] Model">
 
     @property
     def model(self) -> ConversionModel:
@@ -60,7 +50,7 @@ class ConversionViewModel(QObject, IViewModel):
 
     # <editor-fold desc="[+] Model Properties">
 
-    @pyqtProperty(type=str, notify=text_modified)
+    @pyqtProperty(type=str, notify=text_updated)
     def text(self) -> str:
         return self._model.text
 
@@ -68,40 +58,63 @@ class ConversionViewModel(QObject, IViewModel):
     def text(self, value) -> None:
         if self._model.text != value:
             self._model.text = value
-            self.text_modified.emit(value)
+            self.text_updated.emit(value)
 
     # </editor-fold>
 
-    # <editor-fold desc="[+] Signal Slots">
+    # <editor-fold desc="[+] Methods">
 
-    def _on_button_upper_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_upper_case(self.model.text))
+    def text_to_case(self, case_type: CaseType) -> None:
+        """
+        Converts the text in the model to the specified case type.
 
-    def _on_button_lower_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_lower_case(self.model.text))
+        :param case_type: Case type to apply to the text.
+        :raises ValueError: If an unsupported case type is provided.
+        """
 
-    def _on_button_inverse_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_inverse_case(self.model.text))
+        if case_type is CaseType.UPPER:
+            self.text = self.model.to_upper_case(self.text)
 
-    def _on_button_capitalized_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_capitalized_case(self.model.text))
+        elif case_type is CaseType.LOWER:
+            self.text = self.model.to_lower_case(self.text)
 
-    def _on_button_title_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_title_case(self.model.text, self._SHARED_DATA.small_words))
+        elif case_type is CaseType.INVERSE:
+            self.text = self.model.to_inverse_case(self.text)
 
-    def _on_button_sentence_case_clicked(self):
-        self._view.text_edit.setText(self.model.to_sentence_case(self.model.text))
+        elif case_type is CaseType.SENTENCE:
+            self.text = self.model.to_sentence_case(self.text)
 
-    def _on_text_changed(self):
-        self.text = self._view.text_edit.toPlainText()
+        elif case_type is CaseType.CAPITALIZED:
+            self.text = self.model.to_capitalized_case(self.text)
 
-    def _on_button_copy_clicked(self):
-        pyperclip.copy(self._view.text_edit.toPlainText())
+        elif case_type is CaseType.TITLE:
+            self.text = self.model.to_title_case(self.text, self._SHARED_DATA.small_words)
 
-    def _on_button_paste_clicked(self):
-        self._view.text_edit.setPlainText(pyperclip.paste())
+        else:
+            raise ValueError("[!] Unknown/Unsupported CaseType enum value "+str(case_type))
 
-    def _on_button_clear_clicked(self):
-        self._view.text_edit.setPlainText("")
+        self.text_modified.emit(self.text)
+
+    def on_control_signal(self, control_type: ControlType) -> None:
+        """
+        Handles control signals like clearing, copying, or pasting text.
+
+        :param control_type: The control command to execute.
+        :raises ValueError: If an unsupported control type is provided.
+        """
+
+        if control_type is ControlType.CLEAR:
+            self.text = ""
+            self.text_modified.emit(self.text)
+
+        elif control_type is ControlType.COPY:
+            pyperclip.copy(text=self.text)
+
+        elif control_type is ControlType.PASTE:
+            self.text = pyperclip.paste()
+            self.text_modified.emit(self.text)
+
+        else:
+            raise ValueError("[!] Unknown/Unsupported ControlType enum value "+str(control_type))
 
     # </editor-fold>
