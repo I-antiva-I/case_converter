@@ -1,11 +1,12 @@
 from abc import abstractmethod, ABCMeta
 
 from PyQt5.QtCore import QObject
+from PyQt5.QtWidgets import QWidget
 
 from interfaces.i_viewmodel import IViewModel
 
 
-class IViewMeta(ABCMeta, type(QObject)):
+class IViewMeta(ABCMeta, type(QWidget)):
     pass
 
 

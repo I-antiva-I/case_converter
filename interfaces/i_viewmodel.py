@@ -1,7 +1,9 @@
 from abc import abstractmethod, ABCMeta
 
+from PyQt5.QtCore import QObject
 
-class IViewModelMeta(ABCMeta):
+
+class IViewModelMeta(ABCMeta, type(QObject)):
     pass
 
 

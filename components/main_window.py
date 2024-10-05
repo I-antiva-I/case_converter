@@ -4,7 +4,6 @@ from typing import Dict
 from PyQt5.QtGui import QFontDatabase, QIcon
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QTabWidget, QFrame, QVBoxLayout
 
-from interfaces.i_viewmodel import IViewModel
 from models.conversion_model import ConversionModel
 from models.information_model import InformationModel
 from models.shared_data_model import SharedDataModel
@@ -18,24 +17,26 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # Path Constants
+        # Path constants
         self.PATH_TO_STYLES = "assets/css/styles.css"
         self.PATH_TO_FONTS = "assets/fonts/titillium_web"
         
         # Models
+        conversion_m = ConversionModel()
+        information_m = InformationModel()
         shared = SharedDataModel()
 
-        # ViewModels
-        conversion_vm = ConversionViewModel(ConversionView(), ConversionModel(), shared)
-        information_vm = InformationViewModel(InformationView(), InformationModel(), shared)
-        viewmodels : Dict[str, IViewModel] = {
-            "CONV":     conversion_vm,
-            "INFO":     information_vm,
-        }
+        # Viewmodels
+        conversion_vm = ConversionViewModel(conversion_m, shared)
+        information_vm = InformationViewModel(information_m, shared)
+
+        # Views
+        conversion_v = ConversionView(conversion_vm)
+        information_v = InformationView(information_vm)
 
         tabs = QTabWidget()
-        tabs.addTab(viewmodels["CONV"].view, "Conversion")
-        tabs.addTab(viewmodels["INFO"].view, "Information")
+        tabs.addTab(conversion_v, "Conversion")
+        tabs.addTab(information_v, "Information")
         tabs.setCurrentIndex(0)
 
         # Central Widget
@@ -46,10 +47,9 @@ class MainWindow(QMainWindow):
 
         # Window
         self.resize(640, 480)
-        self.setMaximumWidth(640*1.5)
+        self.setMaximumWidth(int(640*1.5))
         self.setWindowTitle("Case Converter")
         self.setWindowIcon(QIcon("assets/images/logo.svg"))
-
 
         # External Margins, Spacing and Size Policies
         central_frame.layout().setContentsMargins(0, 0, 0, 0)
@@ -62,6 +62,7 @@ class MainWindow(QMainWindow):
         # Fonts and Styles
         self.load_fonts()
         self.set_styles()
+
 
         # DEBUG
         """
