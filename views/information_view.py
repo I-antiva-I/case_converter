@@ -1,25 +1,34 @@
-from typing import List
-
 from PyQt5.QtCore import pyqtSignal, QObject
-from PyQt5.QtGui import QCursor
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QGroupBox, QGridLayout, QHBoxLayout, QTextEdit, QFrame, \
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QGroupBox, QHBoxLayout, QFrame, \
     QScrollArea, QSizePolicy
 from PyQt5.QtCore import Qt
 
-
 from components.small_word import SmallWord
-from enums.control_type import ControlType
 from interfaces.i_view import IView, IViewMeta
 from managers.scroll_bar_manager import manage_scroll_bar
 from viewmodels.information_viewmodel import InformationViewModel
 
 
 class InformationView(QWidget, IView, metaclass=IViewMeta):
+    """
+    The `ConversionView` class provides a user interface for managing small words and viewing information on text
+    case transformations.
+    """
+    # <editor-fold desc="[+] Signals">
 
+    # Emitted when a new word is added to the list of small words.
     word_added = pyqtSignal(str)
+
+    # Emitted when a word is removed from the list of small words.
     word_removed = pyqtSignal(str)
 
+    # </editor-fold>
+
     def __init__(self, viewmodel: InformationViewModel):
+        """
+        Initializes view.
+        :param viewmodel: Corresponding InformationViewModel.
+        """
         super().__init__()
 
         self.viewmodel = viewmodel
@@ -163,8 +172,6 @@ class InformationView(QWidget, IView, metaclass=IViewMeta):
 
         label_info_case_title.setProperty("class", "label label--last")
 
-        self.word_components = []
-
         # </editor-fold>
 
         # <editor-fold desc="[+] Signal Connection">
@@ -179,9 +186,11 @@ class InformationView(QWidget, IView, metaclass=IViewMeta):
 
         # </editor-fold>
 
+        self.word_components = []
+
         self.display_words()
 
-   # <editor-fold desc="[+] Viewmodel">
+    # <editor-fold desc="[+] Viewmodel">
 
     @property
     def viewmodel(self) -> InformationViewModel:
@@ -192,18 +201,26 @@ class InformationView(QWidget, IView, metaclass=IViewMeta):
         self._viewmodel = value
 
     # </editor-fold>
-    @property
-    def words_components(self) -> list[QObject]:
-        return self.frame_word_list.children()
 
-    def _on_add_button_clicked(self):
+    # <editor-fold desc="[+] Methods">
+
+    def _on_add_button_clicked(self) -> None:
+        """
+        Handles the "Add" button click event.
+        """
         word: str = self.line_edit_new_word.text()
         self.word_added.emit(word)
 
-    def _on_remove_button_clicked(self, word: str):
+    def _on_remove_button_clicked(self, word: str) -> None:
+        """
+        Handles the "Remove" button click event.
+        """
         self.word_removed.emit(word)
 
-    def display_words(self):
+    def display_words(self) -> None:
+        """
+        Clears the current word list and refills it with the small words from the viewmodel.
+        """
         for word in self.word_components:
             word.deleteLater()
             pass
@@ -217,3 +234,4 @@ class InformationView(QWidget, IView, metaclass=IViewMeta):
 
             component.button_remove_clicked.connect(self._on_remove_button_clicked)
 
+    # </editor-fold>

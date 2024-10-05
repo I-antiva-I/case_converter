@@ -3,17 +3,30 @@ from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QHBoxLayout, QFrame, Q
 
 
 class SmallWord(QWidget):
-    # Signals
+    """
+    The `SmallWord` represents a word and its index in a styled frame, with a remove button.
+    """
+
+    # <editor-fold desc="[+] Signals">
+
+    # Signal emitted when the remove button is clicked, passing the word as a string.
     button_remove_clicked = pyqtSignal(str)
 
+    # </editor-fold>
+
     def __init__(self, word: str, index: int):
+        """
+        Initializes the SmallWord widget with a given word and index.
+
+        :param word: The word assigned to the instance `SmallWord`.
+        :param index: The index of the word.
+        """
+
         super().__init__()
 
         self.word = word
 
-        # Component Definition
-        self.setLayout(QHBoxLayout())
-
+        # Component definition
         frame = QFrame()
         frame.setLayout(QHBoxLayout())
 
@@ -22,14 +35,15 @@ class SmallWord(QWidget):
 
         remove_button = QPushButton("Remove")
 
-        # Component Placement
+        # Component placement
         frame.layout().addWidget(label_index)
         frame.layout().addWidget(label_word)
         frame.layout().addWidget(remove_button)
 
+        self.setLayout(QHBoxLayout())
         self.layout().addWidget(frame)
 
-        # External Margins, Spacing and Size Policies
+        # Margins, spacing and size policies
         self.layout().setContentsMargins(0, 0, 0, 0)
         frame.layout().setContentsMargins(0, 0, 0, 0)
         frame.layout().setSpacing(8)
@@ -39,7 +53,7 @@ class SmallWord(QWidget):
         remove_button.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
         frame.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Maximum)
 
-        # Style Settings
+        # Style settings
         self.setProperty("class", "small-word")
         modifier_odd_even = "odd" if index % 2 == 1 else "even"
         frame.setProperty("class", "small-word__frame small-word__frame--"+modifier_odd_even)
@@ -48,8 +62,11 @@ class SmallWord(QWidget):
         remove_button.setProperty("class", "button button--remove")
         label_index.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
 
-        # Signal Connection
+        # Signal connection
         remove_button.clicked.connect(self._on_remove_button_clicked)
 
     def _on_remove_button_clicked(self):
+        """
+        Emits the `button_remove_clicked` signal when the remove button is clicked.
+        """
         self.button_remove_clicked.emit(self.word)

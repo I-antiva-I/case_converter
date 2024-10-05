@@ -1,24 +1,27 @@
-from __future__ import annotations
 import pyperclip
 from PyQt5.QtCore import QObject, pyqtProperty, pyqtSignal
 
 from enums.case_type import CaseType
 from enums.control_type import ControlType
-
 from models.shared_data_model import SharedDataModel
 from models.conversion_model import ConversionModel
-
 from interfaces.i_viewmodel import IViewModel, IViewModelMeta
 
 
 class ConversionViewModel(QObject, IViewModel, metaclass=IViewModelMeta):
+    """
+    ConversionViewModel
+    The `ConversionViewModel` class provides communication between the view and the model,
+    and handles text transformations.
+
+    """
 
     # <editor-fold desc="[+] Signals">
 
-    # Signal for property changes
+    # Signal emitted when the text property is updated.
     text_updated = pyqtSignal(str)
 
-    # Signal to notify QTextEdit
+    # Signal emitted when the text is modified and needs to notify the view ('QTextEdit' widget)
     text_modified = pyqtSignal(str)
 
     # </editor-fold>
@@ -59,9 +62,15 @@ class ConversionViewModel(QObject, IViewModel, metaclass=IViewModelMeta):
 
     # </editor-fold>
 
-    # <editor-fold desc="[+] Commands">
+    # <editor-fold desc="[+] Methods">
 
-    def text_to_case(self, case_type: CaseType):
+    def text_to_case(self, case_type: CaseType) -> None:
+        """
+        Converts the text in the model to the specified case type.
+
+        :param case_type: Case type to apply to the text.
+        :raises ValueError: If an unsupported case type is provided.
+        """
 
         if case_type is CaseType.UPPER:
             self.text = self.model.to_upper_case(self.text)
@@ -82,11 +91,17 @@ class ConversionViewModel(QObject, IViewModel, metaclass=IViewModelMeta):
             self.text = self.model.to_title_case(self.text, self._SHARED_DATA.small_words)
 
         else:
-            raise ValueError("Unknown/Unsupported CaseType enum value "+str(case_type))
+            raise ValueError("[!] Unknown/Unsupported CaseType enum value "+str(case_type))
 
         self.text_modified.emit(self.text)
 
-    def on_control_signal(self, control_type: ControlType):
+    def on_control_signal(self, control_type: ControlType) -> None:
+        """
+        Handles control signals like clearing, copying, or pasting text.
+
+        :param control_type: The control command to execute.
+        :raises ValueError: If an unsupported control type is provided.
+        """
 
         if control_type is ControlType.CLEAR:
             self.text = ""
@@ -100,6 +115,6 @@ class ConversionViewModel(QObject, IViewModel, metaclass=IViewModelMeta):
             self.text_modified.emit(self.text)
 
         else:
-            raise ValueError("Unknown/Unsupported ControlType enum value "+str(control_type))
+            raise ValueError("[!] Unknown/Unsupported ControlType enum value "+str(control_type))
 
     # </editor-fold>

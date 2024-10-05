@@ -1,9 +1,18 @@
 import string as str_plus
 
-from typing import Set, List
+from typing import Set
 
 
 class ConversionModel:
+    """
+
+    The `ConversionModel` manages text conversion, providing various static methods for text transformation.
+
+    Properties:
+
+    * text : str - A property to get or set the current text stored in the model.
+    """
+
     def __init__(self):
         self._text: str = ""
 
@@ -15,22 +24,47 @@ class ConversionModel:
     def text(self, value: str) -> None:
         self._text = value
 
-    # <editor-fold desc="[+] Text Cases">
+    # <editor-fold desc="[+] Text cases">
 
     @staticmethod
     def to_upper_case(string: str) -> str:
+        """
+        Converts input string to upper case.
+        :param string: Input string.
+        :return: Converted string in upper case.
+        """
+
         return string.upper()
 
     @staticmethod
     def to_lower_case(string: str) -> str:
+        """
+        Converts input string to lower case.
+        :param string: Input string.
+        :return: Converted string in lower case.
+        """
+
         return string.lower()
 
     @staticmethod
     def to_inverse_case(string: str) -> str:
+        """
+        Inverts case of input string, converting uppercase characters to lowercase and vice versa.
+        :param string: Input string.
+        :return: Converted string in inverse case.
+        """
+
         return "".join([char.lower() if char.isupper() else char.upper() for char in string])
 
     @staticmethod
     def to_sentence_case(string: str) -> str:
+        """
+        Converts input string to sentence case, capitalizing the first letter after
+        sentence breaks ('.', '?', '!', ...).
+        :param string: Input string.
+        :return: Converted string in sentence case.
+        """
+
         if len(string) == 0:
             return string
 
@@ -63,10 +97,26 @@ class ConversionModel:
 
     @staticmethod
     def to_capitalized_case(string: str) -> str:
+        """
+        Converts input string to capitalized case, where the first letter of each word is capitalized.
+
+        :param string: Input string.
+        :return: Converted string in capitalized case.
+        """
+
         return string.title()
 
     @staticmethod
     def to_title_case(string: str, small_words: Set[str] = None) -> str:
+        """
+        Converts input string to title case, capitalizing the first word and any word,
+        excluding `small words` (if provided).
+
+        :param string: Input string.
+        :param small_words: Set of `small words`.
+        :return: Converted string in title case.
+        """
+
         words = string.lower().split()
 
         if len(words) == 0:

@@ -4,6 +4,10 @@ import pytest
 
 from models.information_model import InformationModel
 
+"""
+Unit tests for InformationModel
+"""
+
 
 @pytest.mark.parametrize("input_word, input_set, expected_set", [
     ("hello", {"yes", "no", "maybe"}, {"yes", "no", "maybe", "hello"}),

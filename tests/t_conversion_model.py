@@ -2,6 +2,10 @@ import pytest
 
 from models.conversion_model import ConversionModel
 
+"""
+Unit tests for ConversionModel
+"""
+
 
 # <editor-fold desc="[+] Test | to_upper_case">
 @pytest.mark.parametrize("input_string, expected_string", [

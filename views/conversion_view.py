@@ -1,8 +1,5 @@
-from __future__ import annotations
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QGroupBox, QGridLayout, QHBoxLayout, QTextEdit, QSizePolicy, \
-    QGraphicsDropShadowEffect
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QGroupBox, QGridLayout, QTextEdit, QSizePolicy
 
 from enums.control_type import ControlType
 from enums.case_type import CaseType
@@ -12,24 +9,31 @@ from viewmodels.conversion_viewmodel import ConversionViewModel
 
 
 class ConversionView(QWidget, IView, metaclass=IViewMeta):
+    """
+    The `ConversionView` class provides a user interface for text input and transformation.
+    """
 
-    # Signals
+    # <editor-fold desc="[+] Signals">
+
+    # Emitted when one of the case transformation buttons is clicked.
     case_button_clicked = pyqtSignal(CaseType)
+
+    # Emitted when one of the control buttons (copy, paste, clear) is clicked.
     control_button_clicked = pyqtSignal(ControlType)
+
+    # Emitted when the user modifies the text in the QTextEdit, updates value in viewmodel.
     text_changed = pyqtSignal(str)
 
+    # </editor-fold>
+
     def __init__(self, viewmodel: ConversionViewModel):
+        """
+        Initializes view.
+        :param viewmodel: Corresponding ConversionViewModel.
+        """
         super().__init__()
 
         self.viewmodel = viewmodel
-
-        # <editor-fold desc="[+] Signal connection">
-
-        self.case_button_clicked.connect(self.viewmodel.text_to_case)
-        self.control_button_clicked.connect(self.viewmodel.on_control_signal)
-        self.viewmodel.text_modified.connect(self._on_text_modified)
-
-        # </editor-fold>
 
         # <editor-fold desc="[+] Buttons">
 
@@ -105,7 +109,7 @@ class ConversionView(QWidget, IView, metaclass=IViewMeta):
         layout.addWidget(group_control_buttons, stretch=0)
         layout.addWidget(group_text, stretch=1)
 
-        # External margins, spacing and size policies
+        # Margins, spacing and size policies
 
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(0)
@@ -140,6 +144,14 @@ class ConversionView(QWidget, IView, metaclass=IViewMeta):
 
         # </editor-fold>
 
+        # <editor-fold desc="[+] Signal connection">
+
+        self.case_button_clicked.connect(self.viewmodel.text_to_case)
+        self.control_button_clicked.connect(self.viewmodel.on_control_signal)
+        self.viewmodel.text_modified.connect(self._on_text_modified)
+
+        # </editor-fold>
+
     # <editor-fold desc="[+] Viewmodel">
 
     @property
@@ -152,14 +164,39 @@ class ConversionView(QWidget, IView, metaclass=IViewMeta):
 
     # </editor-fold>
 
-    def _on_case_button_clicked(self, case_type: CaseType):
+    # <editor-fold desc="[+] Methods">
+
+    def _on_case_button_clicked(self, case_type: CaseType) -> None:
+        """
+        Handles case transformation button clicks and emits the `case_button_clicked` signal.
+
+        :param case_type: Corresponding CaseType.
+        """
+
         self.case_button_clicked.emit(case_type)
 
-    def _on_text_changed(self):
+    def _on_text_changed(self) -> None:
+        """
+        Updates the viewmodel's text
+        """
+
         self.viewmodel.text = self.text_edit.toPlainText()
 
-    def _on_text_modified(self, value: str):
+    def _on_text_modified(self, value: str) -> None:
+        """
+        Updates the QTextEdit's content
+        :param value: New QTextEdit value.
+        """
+
         self.text_edit.setText(value)
 
-    def _on_control_button_clicked(self, control_type: ControlType):
+    def _on_control_button_clicked(self, control_type: ControlType) -> None:
+        """
+        Handles control button clicks and emits the `control_button_clicked` signal.
+
+        :param control_type: Corresponding ControlType.
+        """
+
         self.control_button_clicked.emit(control_type)
+
+    # </editor-fold>
